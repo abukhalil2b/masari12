@@ -98,11 +98,11 @@
                     </ul>
                 </li>
 
-                <!-- المهام -->
-                <x-nav-header title='المهام' />
+                <!-- الدورات -->
+                <x-nav-header title='الدورات' />
              
                 <li class="menu nav-item">
-                    <a href="{{ route('admin.task.index') }}" class="nav-link group">
+                    <a href="{{ route('admin.course.index') }}" class="nav-link group">
                         <div class="flex items-center">
 
                             <svg class="group-hover:!text-primary shrink-0" width="20" height="20"
@@ -120,6 +120,22 @@
                                     d="M18.75 16C18.75 16.4142 18.4142 16.75 18 16.75H6C5.58579 16.75 5.25 16.4142 5.25 16C5.25 15.5858 5.58579 15.25 6 15.25H18C18.4142 15.25 18.75 15.5858 18.75 16Z"
                                     fill="currentColor" />
                             </svg>
+                            <span
+                                class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">
+                                قائمة الدورات
+                            </span>
+                        </div>
+                    </a>
+                </li>
+
+                <!-- المهام -->
+                <x-nav-header title='المهام' />
+             
+                <li class="menu nav-item">
+                    <a href="{{ route('admin.task.index') }}" class="nav-link group">
+                        <div class="flex items-center">
+
+                            <x-svgicon.book-pen/>
                             <span
                                 class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">
                                 قائمة مهامي

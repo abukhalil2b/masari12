@@ -1,20 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class CourseController extends Controller
+class AdminCourseController extends Controller
 {
-    public function welcome()
-    {
-       
-        return view('welcome');
-    }
+
 
     public function index()
     {
@@ -59,8 +55,4 @@ class CourseController extends Controller
 
 
 
-    public function destroy(Course $course)
-    {
-        //
-    }
 }

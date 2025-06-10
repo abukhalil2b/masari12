@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 
 
 class ProfileController extends Controller
@@ -28,42 +26,48 @@ class ProfileController extends Controller
     }
 
 
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request)
     {
+        // return $request->all();
+
+        $user = User::findOrfail($request->user()->id);
+
         $userDetail = DB::table('user_details')
             ->where('user_id', $request->user()->id)
             ->first();
 
         if (!$userDetail) {
-            abort(404);
-        }
-
-        $request->user()->fill($request->validated());
-
-        $request->user()->save();
-
-        $updateDetails = false;
-
-        if ($request->phone != $userDetail->phone) {
-            $updateDetails = true;
-
-            $data['phone'] = $request->phone;
-        }
-
-        if ($request->title != $userDetail->title) {
-            $updateDetails = true;
-
-            $data['title'] = $request->title;
-        }
-
-        if ($updateDetails) {
+            DB::table('user_details')->insert([
+                'about' => $request->about,
+                'date_of_birth' => $request->date_of_birth,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'phone' => $request->phone,
+                'user_id' => $request->user()->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        } else {
 
             DB::table('user_details')
                 ->where('user_id', $request->user()->id)
-                ->update($data);
+                ->update([
+                    'about' => $request->about,
+                    'date_of_birth' => $request->date_of_birth,
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'phone' => $request->phone,
+                    'user_id' => $request->user()->id,
+                    'updated_at' => now(),
+                ]);
         }
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        if($request->name){
+            $user->name = $request->name;
+            $user->save();
+        }
+
+        return back()->with(['status' => 'success', 'message' => 'profile-updated']);
     }
 
     public function switchAccount(Profile $profile)
@@ -76,7 +80,7 @@ class ProfileController extends Controller
 
         if ($userProfile) {
 
-            $user->profile_using = $profile->title;
+            $user->profile_using = $profile->about;
 
             $user->save();
 
@@ -92,16 +96,16 @@ class ProfileController extends Controller
         return view('admin.profile.add_account_show_form', compact('user', 'profile'));
     }
 
-    public function addAccount(User $user, $title)
+    public function addAccount(User $user, $about)
     {
-        $allowedProfiles = [ 'trainer', 'trainee'];
+        $allowedProfiles = ['trainer', 'trainee'];
 
-        if (!in_array($title, $allowedProfiles)) {
+        if (!in_array($about, $allowedProfiles)) {
             abort(403, 'لا يمكن اضافة هذا الحساب');
         }
 
-        //validate prifle title
-        $profile = Profile::where('title', $title)->first();
+        //validate prifle about
+        $profile = Profile::where('about', $about)->first();
 
         if ($profile) {
 
@@ -118,7 +122,7 @@ class ProfileController extends Controller
             }
         }
 
-        
+
         $profileUsing = User::findOrFail($user->id)->profile_using;
 
         $routeName = 'admin.user.' . $profileUsing . '.show';
@@ -142,8 +146,8 @@ class ProfileController extends Controller
             abort(403);
         }
 
-        if($loggedUser->id == 1){
-             abort(403);
+        if ($loggedUser->id == 1) {
+            abort(403);
         }
 
         DB::table('user_profile')
@@ -179,7 +183,7 @@ class ProfileController extends Controller
     {
 
         //we do not allow to remove admin profile
-        if ($profile->title == 'admin') {
+        if ($profile->about == 'admin') {
             abort(403, 'لا يمكن إزالة هذا الحساب');
         }
 
@@ -214,7 +218,7 @@ class ProfileController extends Controller
                     ])->delete();
 
                 // if user was using deleted profile then we need change it with one of his profile
-                if ($profile->title == $user->profile_using) {
+                if ($profile->about == $user->profile_using) {
 
                     //get available profile ids after deleting
                     $userProfileIds = DB::table('user_profile')
@@ -227,7 +231,7 @@ class ProfileController extends Controller
 
                     //set it as his profile
                     User::where('id', $user->id)->update([
-                        'profile_using' => $profile->title
+                        'profile_using' => $profile->about
                     ]);
                 }
             }

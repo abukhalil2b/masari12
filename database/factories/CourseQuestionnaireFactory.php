@@ -13,7 +13,7 @@ class CourseQuestionnaireFactory extends Factory
     public function definition()
     {
         return [
-            'course_id' => Course::factory(),
+            'course_id' => 2,
             'title' => $this->faker->sentence(3),
             'google_form_url' => $this->faker->url,
         ];

@@ -13,7 +13,7 @@ class CourseWeekFactory extends Factory
     public function definition()
     {
         return [
-            'course_id' => Course::factory(),
+            'course_id' => 1,
             'title' => $this->faker->sentence(4),
             'order' => $this->faker->numberBetween(1, 12),
             'description' => $this->faker->optional()->paragraph,

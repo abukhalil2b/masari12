@@ -17,13 +17,22 @@ class UsersTableSeeder extends Seeder
     public function run(): void
     {
 
-        User::create([
+        $superadminUser = User::create([
             'name' => 'ibrahim',
             'civil_id' => '91171747',
             'password' => Hash::make('91171747'),
             'profile_using' => 'super_admin',
             'gender' => 'male',
             'status' => 'active',
+        ]);
+
+        UserDetail::create([
+            'user_id' => $superadminUser->id,
+            'first_name' => 'ibrahim',
+            'last_name' => 'albimani',
+            'about' => 'IT support.',
+            'date_of_birth' => Carbon::parse('1985-05-10'),
+            'phone' => '91171747',
         ]);
 
         // Create an Admin User

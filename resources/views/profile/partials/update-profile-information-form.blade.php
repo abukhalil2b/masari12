@@ -14,15 +14,34 @@
         </div>
 
         <div>
-            <x-input-label for="title" :value=" 'تعريف بسيط مثلا (مجاز في القراءات العشر)' " />
-            <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" :value="old('title', $user->detail->title)"  />
-            <x-input-error class="mt-2" :messages="$errors->get('title')" />
+            <x-input-label for="first_name" :value="'الاسم الأول'" />
+            <x-text-input id="first_name" name="first_name" type="text" class="mt-1 block w-full" :value="old('first_name', $user->first_name)" required autofocus autocomplete="first_name" />
+            <x-input-error class="mt-2" :messages="$errors->get('first_name')" />
+        </div>
+
+        <div>
+            <x-input-label for="last_name" :value="'القبيلة'"/>
+            <x-text-input id="last_name" name="last_name" type="text" class="mt-1 block w-full" :value="old('last_name', $user->last_name)" required autofocus autocomplete="last_name" />
+            <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
+        </div>
+
+
+        <div>
+            <x-input-label for="about" :value=" 'تعريف بسيط مثلا (مجاز في القراءات العشر)' " />
+            <x-text-input id="about" name="about" type="text" class="mt-1 block w-full" :value="old('about', $user?->detail?->about)"  />
+            <x-input-error class="mt-2" :messages="$errors->get('about')" />
         </div>
 
         <div>
             <x-input-label for="phone" :value=" 'الهاتف' " />
-            <x-text-input id="phone" name="phone" type="number" class="mt-1 block w-full" :value="old('phone', $user->detail->phone)" required />
+            <x-text-input id="phone" name="phone" type="number" class="mt-1 block w-full" :value="old('phone', $user->detail?->phone)" required />
             <x-input-error class="mt-2" :messages="$errors->get('phone')" />
+        </div>
+
+        <div>
+            <x-input-label for="date_of_birth" :value=" 'تاريخ الميلاد' " />
+            <x-text-input id="date_of_birth" name="date_of_birth" type="date" class="mt-1 block w-full" :value="old('date_of_birth', $user->detail?->date_of_birth)" />
+            <x-input-error class="mt-2" :messages="$errors->get('date_of_birth')" />
         </div>
 
         <div class="flex items-center gap-4">

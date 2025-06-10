@@ -4,9 +4,8 @@
 use App\Http\Controllers\Admin\AdminImpersonateController;
 use App\Http\Controllers\Admin\AdminProfilePermissionController;
 
-
-use App\Http\Controllers\CourseController;
-
+use App\Http\Controllers\Admin\AdminCourseController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
@@ -16,20 +15,6 @@ use App\Http\Controllers\UserTaskController;
 use App\Http\Controllers\UsertraineeController;
 use App\Http\Controllers\UsertrainerController;
 
-/*
-|--------------------------------------------------------------------------
-| visitors
-|--------------------------------------------------------------------------
- */
-use Illuminate\Support\Facades\Route;
-
-// Route::get('job', function () {
-//     $user = User::find(1);
-
-//     ProcessPodcast::dispatch($user)->delay(now()->addSeconds(5)); // Delay for 5 second
-
-//     return 'Job dispatched! The user status will be updated in 5 second.';
-// });
 
 Route::get('/', function () {
 	return view('welcome');
@@ -162,29 +147,18 @@ Route::middleware(['auth', 'impersonate'])->prefix('admin/user')->group(function
  */
 Route::middleware(['auth', 'impersonate'])->prefix('admin/course')->group(function () {
 
-	Route::get('index/{program}', [CourseController::class, 'index'])
+	Route::get('index', [AdminCourseController::class, 'index'])
 		->middleware('permission:admin.course.index')
 		->name('admin.course.index');
 
-	Route::get('show/{course}', [CourseController::class, 'show'])
+	Route::get('show/{course}', [AdminCourseController::class, 'show'])
 		->middleware('permission:admin.course.show')
 		->name('admin.course.show');
 
-	Route::post('store', [CourseController::class, 'store'])
+	Route::post('store', [AdminCourseController::class, 'store'])
 		->middleware('permission:admin.course.store')
 		->name('admin.course.store');
 
-	Route::post('update/{course}', [CourseController::class, 'update'])
-		->middleware('permission:admin.course.update')
-		->name('admin.course.update');
-
-	Route::get('delete_form/{course}', [CourseController::class, 'deleteForm'])
-		->middleware('permission:admin.course.delete')
-		->name('admin.course.delete_form');
-
-	Route::get('delete/{course}', [CourseController::class, 'delete'])
-		->middleware('permission:admin.course.delete')
-		->name('admin.course.delete');
 });
 
 

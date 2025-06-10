@@ -20,7 +20,7 @@
         }
 
         // set rtl layout
-        Alpine.store('app').setRTLLayout();
+
     });
 
     // set current year in footer
@@ -42,6 +42,7 @@
     initPerfectScrollbar();
 
     document.addEventListener('alpine:init', () => {
+
         Alpine.data('collapse', () => ({
             collapse: false,
 
@@ -227,5 +228,7 @@
                 this.sidebar = !this.sidebar;
             },
         });
+
+        Alpine.store('app').setRTLLayout();
     });
 })();

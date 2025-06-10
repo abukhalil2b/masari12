@@ -16,7 +16,7 @@ class CourseLessonFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(3),
-            'course_id' => Course::factory(),
+            'course_id' => 1,
             'course_week_id' => $this->faker->optional()->randomElement(CourseWeek::pluck('id')->toArray()),
             'order' => $this->faker->numberBetween(1, 20),
             'type' => $this->faker->randomElement(['video', 'live', 'file', 'text', 'quiz']),
