@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\CourseCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -12,21 +13,29 @@ class AdminCourseController extends Controller
 {
 
 
-    public function index()
+    public function index(Request $request)
     {
-        //TODO check permission for other profiles 
-        $courses = Course::all();
+        $categories = CourseCategory::all();
 
-        $trainers = User::trainerIndex();
+        // Check if a category is selected
+        $selectedCategory = $request->input('category_id');
 
-        
-        return view('admin.course.index', compact('courses',  'trainers'));
+        // Filter courses based on selected category
+        $coursesQuery = Course::with(['courseCategory', 'courseLevel']);
+
+        if ($selectedCategory) {
+            $coursesQuery->where('course_category_id', $selectedCategory);
+        }
+
+        $courses = $coursesQuery->get();
+
+        return view('admin.course.index', compact('courses', 'categories', 'selectedCategory'));
     }
+
 
     public function show(Course $course)
     {
-
-        return view('admin.course.show');
+        return view('admin.course.show', compact('course'));
     }
 
     public function store(Request $request)
@@ -52,7 +61,4 @@ class AdminCourseController extends Controller
 
         return back();
     }
-
-
-
 }

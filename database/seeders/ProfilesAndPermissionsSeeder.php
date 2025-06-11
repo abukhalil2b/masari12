@@ -14,17 +14,7 @@ class ProfilesAndPermissionsSeeder extends Seeder
      */
     public function run(): void
     {
-        $profilesData = [
-            ['title' => 'Admin', 'slug' => 'admin'],
-            ['title' => 'Trainer', 'slug' => 'trainer'],
-            ['title' => 'Trainee', 'slug' => 'trainee'],
-            ['title' => 'Support', 'slug' => 'support'], // Example
-            ['title' => 'Accounting', 'slug' => 'accounting'], // Example
-        ];
-
-        foreach ($profilesData as $data) {
-            Profile::create(['title' => $data['title']]);
-        }
+        
 
         // Example Permissions (you'll need to define many more)
         $permissionsData = [
@@ -57,20 +47,5 @@ class ProfilesAndPermissionsSeeder extends Seeder
             ]);
         }
 
-        if ($trainee) {
-            $trainee->permissions()->sync([]); // Trainees might not have direct permissions, but gain access via their profile.
-        }
-
-        // Assign 'admin' profile to the admin user created in UsersTableSeeder
-        $adminUser = User::where('civil_id', '1234567890')->first();
-        if ($adminUser && $admin) {
-            $adminUser->profiles()->syncWithoutDetaching([$admin->id]);
-        }
-
-        // Assign 'trainer' profile to the trainer user created in UsersTableSeeder
-        $trainerUser = User::where('civil_id', '0987654321')->first();
-        if ($trainerUser && $trainer) {
-            $trainerUser->profiles()->syncWithoutDetaching([$trainer->id]);
-        }
     }
 }

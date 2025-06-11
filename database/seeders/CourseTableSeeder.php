@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Course;
+use App\Models\CourseCategory;
+use App\Models\CourseLevel;
 use Illuminate\Database\Seeder;
 
 class CourseTableSeeder extends Seeder
@@ -12,6 +14,40 @@ class CourseTableSeeder extends Seeder
      */
     public function run(): void
     {
+        CourseLevel::create([
+            'title'=>'المستوى الأول',
+            'level_order'=>1,
+            'description'=>'المستوى الأول',
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
+
+        CourseLevel::create([
+            'title'=>'المستوى الثاني',
+            'level_order'=>2,
+            'description'=>'المستوى الثاني',
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
+
+        CourseCategory::create([
+            'name'=>'التنمية البشرية',
+            'slug'=>'human_development',
+            'description'=>'التقنيات الحديثة',
+            'parent_id'=>NULL,
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
+
+        CourseCategory::create([
+            'name'=>'التقنيات الحديثة',
+            'slug'=>'new_technology',
+            'description'=>'التقنيات الحديثة',
+            'parent_id'=>NULL,
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
+
         Course::create([
             'title' => 'أسس التنمية البشرية وتطوير الذات',
             'cover_image_url' => null,
@@ -35,7 +71,7 @@ class CourseTableSeeder extends Seeder
             'description' => 'يقدم هذا المساق أدوات وأساليب حديثة لتحديد الأهداف طويلة المدى وتحقيقها بفعالية، مع التركيز على تحليل البيئة واتخاذ القرارات الاستراتيجية.',
             'language' => 'en',
             'status' => 'published',
-            'course_level_id' => 3,
+            'course_level_id' => 1,
             'course_category_id' => 2,
             'registration_type' => 'at_period',
             'registration_start_at' => '2025-07-01 00:00:00',
@@ -52,8 +88,8 @@ class CourseTableSeeder extends Seeder
             'description' => 'دورة تمهيدية لتعليم أساسيات استخدام الحاسوب، مثل معالجة النصوص، الجداول الإلكترونية، وأساسيات الإنترنت والبريد الإلكتروني.',
             'language' => 'ar',
             'status' => 'published',
-            'course_level_id' => 1,
-            'course_category_id' => 3,
+            'course_level_id' => 2,
+            'course_category_id' => 1,
             'registration_type' => 'open',
             'registration_start_at' => null,
             'registration_end_at' => null,
@@ -70,7 +106,7 @@ class CourseTableSeeder extends Seeder
             'language' => 'en',
             'status' => 'draft',
             'course_level_id' => 2,
-            'course_category_id' => 3,
+            'course_category_id' => 2,
             'registration_type' => 'open',
             'registration_start_at' => null,
             'registration_end_at' => null,
@@ -86,7 +122,7 @@ class CourseTableSeeder extends Seeder
             'description' => 'دورة مصممة لتطوير المهارات القيادية، مع التركيز على بناء فرق ناجحة، اتخاذ القرارات، والتحفيز الفعّال داخل المؤسسات المختلفة.',
             'language' => 'ar',
             'status' => 'published',
-            'course_level_id' => 3,
+            'course_level_id' => 2,
             'course_category_id' => 2,
             'registration_type' => 'at_period',
             'registration_start_at' => '2025-08-15 00:00:00',

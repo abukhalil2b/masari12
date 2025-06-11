@@ -1,58 +1,27 @@
 {
+    "open": "مفتوح",
+    "at_period": "محدد بوقت",
+    "published": "تم النشر",
+    "draft": "مسودة",
     "super_admin": "إدارة النظام",
     "admin": "إداري",
-
-    "trainer": "مدرب",
-    "father": "ولي الأمر",
-    "trainee": "متدرب",
-
     "admins": "إداريون",
-
+    "trainer": "مدرب",
+    "trainee": "متدرب",
     "trainers": "مدربون",
-    "fathers": " أولياء الأمور",
     "trainees": "متدربين",
     "finances": "المالية",
-    
     "content": "محتوى الرسالة",
-
     "male": "ذكر",
     "female": "أنثى",
-    "mix": "مختلط",
     "males": "ذكور",
     "females": "اناث",
-
     "type": "النوع",
-    "one_time": "مرة واحدة",
-    "per_hour":"لكل ساعة",
-    "monthly":"شهريا",
-    "free":"مجانا",
-
-    "individual": "تعليم منفرد",
-    "in_circle": "تعليم داخل حلقة",
-
-    "recite": "تلاوة",
-    "memorize": "حفظ",
-    "ejaza": "إجازة",
-
+    "free": "مجانا",
     "active": "مفعل",
     "disable": "معطل",
-
-    "waiting":"في الإنتظار",
-    "registration":"التسجيل",
-    "standby":"في الاحتياط",
-    "exam":"اختبار",
-    "payment":"الدفع",
-    "joined":"تم الإنضمام",
-
     "registration_is_open": "التسجيل متاح",
     "registration_is_close": "التسجيل مغلق (الدراسة بدأت)",
-    "circle_is_close": "الحلقة مغلقة",
-
-    "wrong-small-lahan":"اللحن الخفي",
-    "wrong-attention":"التنبيه",
-    "wrong-stop-start":"الوقف والابتداء",
-    "wrong-larg-lahan":"اللحن الجلي",
-
     "Sun": "الأحد",
     "Mon": "الأثنين",
     "Tue": "الثلاثاء",

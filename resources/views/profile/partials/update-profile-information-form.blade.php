@@ -25,9 +25,8 @@
             <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
         </div>
 
-
         <div>
-            <x-input-label for="about" :value=" 'تعريف بسيط مثلا (مجاز في القراءات العشر)' " />
+            <x-input-label for="about" :value=" 'تعريف بسيط مثلا (خبير في التنمية البشرية)' " />
             <x-text-input id="about" name="about" type="text" class="mt-1 block w-full" :value="old('about', $user?->detail?->about)"  />
             <x-input-error class="mt-2" :messages="$errors->get('about')" />
         </div>

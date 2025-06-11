@@ -3,50 +3,56 @@
     @include('inc._modal-add-new-course')
 
     <div class="py-4">
-        @foreach ($courses as $course)
-            <div class="bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden mb-6">
-                <div
-                    class="bg-orange-50 text-orange-700 p-4 shadow-md {{ $course->status == 'disable' ? 'opacity-50' : '' }}">
-                    <h3 class="text-lg font-bold text-center">{{ $course->title }}</h3>
-                </div>
+        <form method="GET" action="{{ route('admin.course.index') }}" class="mb-4">
+           <div class="flex gap-3 items-center justify-end">
+             <label for="category" class="font-bold">اختر الفئة:</label>
+            <select name="category_id" id="category" class="border p-2 rounded w-40">
+                <option value="">كل الفئات</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ $selectedCategory == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+            <button type="submit" class="btn btn-primary">تصفية</button>
+           </div>
+        </form>
+        <table class="table table-striped border rounded-lg shadow-sm">
+            <thead class="bg-orange-100 text-orange-900">
+                <tr>
+                    <th>#</th>
+                    <th>العنوان</th>
+                    <th>الفئة</th>
+                    <th>النوع</th>
+                    <th>الحالة</th>
+                    <th>هل مجانية</th>
+                    <th>تاريخ بداية الدورة</th>
+                    <th>العمليات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($courses as $key => $course)
+                    <tr class="p-4">
+                        <td>{{ $key + 1 }}</td>
+                        <td class="font-bold">{{ $course->title }}</td>
+                        <td>{{ $course->courseCategory->name }}</td>
+                        <td>{{ __($course->registration_type) }}</td>
+                        <td class="{{ $course->status == 'published' ? 'text-green-600' : 'text-red-600' }}">
+                            {{ __($course->status) }}</td>
+                        <td>{{ $course->is_free ? 'نعم' : 'لا' }}</td>
+                        <td>{{ $course->course_start_at ?? 'غير محدد' }}</td>
+                        <td>
+                            <a href="{{ route('admin.course.show', $course->id) }}"
+                                class="btn btn-sm btn-info flex gap-2">
+                                <x-svgicon.book />
+                                <span>التفاصيل</span>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
-                <div class="p-4 space-y-3">
-                    <div class="grid grid-cols-12 gap-4">
-                        <div class="col-span-3 bg-gray-100 p-3 font-semibold rounded">الوصف:</div>
-                        <div class="col-span-9 text-gray-600">{{ $course->description }}</div>
-                    </div>
-
-                    @if ($course->registration_type !== 'at_period')
-                        <div class="grid grid-cols-12 gap-4">
-                            <div class="col-span-3 bg-gray-100 p-3 font-semibold rounded">تاريخ بدء التسجيل:</div>
-                            <div class="col-span-9 text-gray-600">{{ $course->registration_start_at ?? 'غير محدد' }}
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-12 gap-4">
-                            <div class="col-span-3 bg-gray-100 p-3 font-semibold rounded">تاريخ انتهاء التسجيل:</div>
-                            <div class="col-span-9 text-gray-600">{{ $course->registration_end_at ?? 'غير محدد' }}</div>
-                        </div>
-                        <div class="grid grid-cols-12 gap-4">
-                            <div class="col-span-3 bg-gray-100 p-3 font-semibold rounded">تاريخ بداية الدورة:</div>
-                            <div class="col-span-9 text-gray-600">{{ $course->course_start_at ?? 'غير محدد' }}</div>
-                        </div>
-                        <div class="grid grid-cols-12 gap-4">
-                            <div class="col-span-3 bg-gray-100 p-3 font-semibold rounded">تاريخ نهاية الدورة:</div>
-                            <div class="col-span-9 text-gray-600">{{ $course->course_end_at ?? 'غير محدد' }}</div>
-                        </div>
-                    @endif
-
-                    <div class="grid grid-cols-12 gap-4">
-                        <div class="col-span-3 bg-gray-100 p-3 font-semibold rounded">السعة القصوى:</div>
-                        <div class="col-span-9 text-gray-600">{{ $course->max_capacity ?? 'غير محدد' }}</div>
-                    </div>
-
-                    <div class="grid grid-cols-12 gap-4">
-                        <div class="col-span-3 bg-gray-100 p-3 font-semibold rounded">السعر:</div>
-                        <div class="col-span-9 text-gray-600 font-bold">{{ $course->price }} OMR</div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
     </div>
+
 </x-app-layout>

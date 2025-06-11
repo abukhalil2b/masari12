@@ -60,8 +60,14 @@ return new class extends Migration
             $table->timestamp('course_start_at')->nullable(); //Start date and time for the course content availability (for "at_period" courses)
             $table->timestamp('course_end_at')->nullable(); //End date and time for the course content availability (for "at_period" courses)
             $table->tinyInteger('max_capacity')->nullable(); //Maximum number of trainees allowed (for "at_period" courses, nullable for "open" courses)
+            $table->tinyInteger('points')->nullable(); //points for trainee when he finished course
+            $table->tinyInteger('total_lessons')->default(0); //we can calculate it while creating lessons. it is better for quering
+            $table->tinyInteger('total_hours')->default(0); //we can calculate it while creating lessons. it is better for quering
+            $table->boolean('is_only_live')->default(false); //some course will be only online by Google meet or Zoom
+            $table->boolean('is_free')->default(true); //if it is not free then we activate next 2 fields (purchase_price,purchase_points)
 
-            $table->decimal('price', 7, 3)->default(0); //Price of the course (e.g., 13.000). Set to 0 for free courses.
+            $table->decimal('purchase_price', 7, 3)->default(0); //Price of the course (e.g., 13.000). Trainee can take it by money
+            $table->integer('purchase_points')->default(0); //Price of the course (e.g., 5000 points). Trainee can take it by points
             $table->timestamps();
         });
 

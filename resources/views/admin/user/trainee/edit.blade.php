@@ -41,7 +41,7 @@
             </div>
 
             <div class="mt-3">
-                <x-input-label for="title" value=" تعريف بسيط مثلا (مجاز في القراءات العشر)" />
+                <x-input-label for="title" value=" تعريف بسيط مثلا (خبير في التنمية البشرية)" />
 
                 @if($trainerdetail)
                 <x-text-input id="title" name="title" type="text" class="mt-1 w-full" value="{{ $trainerdetail->title }}" />
