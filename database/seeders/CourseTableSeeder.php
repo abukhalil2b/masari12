@@ -62,7 +62,7 @@ class CourseTableSeeder extends Seeder
             'course_start_at' => null,
             'course_end_at' => null,
             'max_capacity' => null,
-            'price' => 25.000
+            'purchase_price' => 25.000
         ]);
 
         Course::create([
@@ -79,7 +79,7 @@ class CourseTableSeeder extends Seeder
             'course_start_at' => '2025-07-15 00:00:00',
             'course_end_at' => '2025-08-30 23:59:59',
             'max_capacity' => 50,
-            'price' => 50.000
+            'purchase_price' => 50.000
         ]);
 
         Course::create([
@@ -96,7 +96,7 @@ class CourseTableSeeder extends Seeder
             'course_start_at' => null,
             'course_end_at' => null,
             'max_capacity' => null,
-            'price' => 0
+            'purchase_price' => 0
         ]);
 
         Course::create([
@@ -113,7 +113,7 @@ class CourseTableSeeder extends Seeder
             'course_start_at' => null,
             'course_end_at' => null,
             'max_capacity' => null,
-            'price' => 75.000
+            'purchase_price' => 75.000
         ]);
 
         Course::create([
@@ -130,7 +130,7 @@ class CourseTableSeeder extends Seeder
             'course_start_at' => '2025-09-01 00:00:00',
             'course_end_at' => '2025-10-15 23:59:59',
             'max_capacity' => 40,
-            'price' => 60.000
+            'purchase_price' => 60.000
         ]);
     }
 }
