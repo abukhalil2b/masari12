@@ -49,7 +49,7 @@
                             @php
                                 $userProgress = 91;
                             @endphp
-                            <x-svgicon.roundprogress :percentage="$userProgress" />
+                            <x-svgicon.round-progress :percentage="$userProgress" />
                         </div>
 @php
                                 $brainProgress = 91;
