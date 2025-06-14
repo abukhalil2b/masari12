@@ -87,7 +87,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Trainee Khamis',
             'civil_id' => '3987654321',
             'password' => Hash::make('password'),
-            'profile_using' => 'trainer',
+            'profile_using' => 'trainee',
             'gender' => 'male',
             'status' => 'active',
         ]);

@@ -27,10 +27,10 @@ class DatabaseSeeder extends Seeder
 	public function run(): void
 	{
 		$profilesData = [
-            ['title' => 'Admin', 'slug' => 'admin'],
-            ['title' => 'Trainer', 'slug' => 'trainer'],
-            ['title' => 'Trainee', 'slug' => 'trainee'],
-            ['title' => 'Support', 'slug' => 'support']
+            ['title' => 'admin'],
+            ['title' => 'trainer'],
+            ['title' => 'trainee'],
+            ['title' => 'support']
         ];
 
         foreach ($profilesData as $data) {

@@ -3,7 +3,6 @@
 
 use App\Http\Controllers\Admin\AdminImpersonateController;
 use App\Http\Controllers\Admin\AdminProfilePermissionController;
-
 use App\Http\Controllers\Admin\AdminCourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -91,7 +90,7 @@ Route::middleware(['auth', 'impersonate'])->prefix('admin/user')->group(function
 	Route::get('trainer/index', [UsertrainerController::class, 'trainerIndex'])
 		->middleware('permission:admin.user.trainer.index')
 		->name('admin.user.trainer.index');
-		
+
 	Route::get('trainer/edit/{trainer}', [UsertrainerController::class, 'trainerEdit'])
 		->middleware('permission:admin.user.trainer.update')
 		->name('admin.user.trainer.edit');
@@ -99,7 +98,6 @@ Route::middleware(['auth', 'impersonate'])->prefix('admin/user')->group(function
 	Route::post('trainer/update/{trainer}', [UsertrainerController::class, 'trainerUpdate'])
 		->middleware('permission:admin.user.trainer.update')
 		->name('admin.user.trainer.update');
-
 });
 
 /*
@@ -136,7 +134,6 @@ Route::middleware(['auth', 'impersonate'])->prefix('admin/user')->group(function
 	Route::post('trainee/store', [UsertraineeController::class, 'traineeStore'])
 		->middleware('permission:admin.user.trainee.store')
 		->name('admin.user.trainee.store');
-
 });
 
 
@@ -158,7 +155,6 @@ Route::middleware(['auth', 'impersonate'])->prefix('admin/course')->group(functi
 	Route::post('store', [AdminCourseController::class, 'store'])
 		->middleware('permission:admin.course.store')
 		->name('admin.course.store');
-
 });
 
 
