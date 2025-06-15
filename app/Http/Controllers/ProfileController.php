@@ -96,16 +96,16 @@ class ProfileController extends Controller
         return view('admin.profile.add_account_show_form', compact('user', 'profile'));
     }
 
-    public function addAccount(User $user, $about)
+    public function addAccount(User $user, $title)
     {
         $allowedProfiles = ['trainer', 'trainee'];
 
-        if (!in_array($about, $allowedProfiles)) {
+        if (!in_array($title, $allowedProfiles)) {
             abort(403, 'لا يمكن اضافة هذا الحساب');
         }
 
         //validate prifle about
-        $profile = Profile::where('about', $about)->first();
+        $profile = Profile::where('title', $title)->first();
 
         if ($profile) {
 
