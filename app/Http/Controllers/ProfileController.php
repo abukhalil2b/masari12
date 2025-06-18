@@ -80,7 +80,7 @@ class ProfileController extends Controller
 
         if ($userProfile) {
 
-            $user->profile_using = $profile->about;
+            $user->profile_using = $profile->title;
 
             $user->save();
 

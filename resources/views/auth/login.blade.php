@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,32 +30,24 @@
             <h1 class="font-frutiger text-3xl font-bold mb-8 text-center">تسجيل الدخول</h1>
 
             <div class="mb-4">
-                <input 
-                    type="number" 
-                    name="civil_id" 
-                    placeholder="الرقم المدني" 
+                <input type="number" name="civil_id" placeholder="الرقم المدني"
                     class="shadow placeholder-gray-800 text-gray-700 rounded bg-white p-5 w-full focus:bg-white outline-none"
                     value="">
             </div>
 
             <div class="mb-4 relative" x-data="{ show: false }">
-    <input 
-        :type="show ? 'text' : 'password'" 
-        name="password" 
-        placeholder="كلمة المرور" 
-        class="shadow placeholder-gray-800 text-gray-700 rounded bg-white p-5 w-full focus:bg-white outline-none"
-        value="">
+                <input :type="show ? 'text' : 'password'" name="password" placeholder="كلمة المرور"
+                    class="shadow placeholder-gray-800 text-gray-700 rounded bg-white p-5 w-full focus:bg-white outline-none"
+                    value="">
 
-    <button 
-        type="button"
-        @click="show = !show"
-        class="absolute inset-y-0 left-3 flex items-center text-gray-700">
-        <i class="material-icons">
-            <span x-show="!show">visibility</span>
-            <span x-show="show">visibility_off</span>
-        </i>
-    </button>
-</div>
+                <button type="button" @click="show = !show"
+                    class="absolute inset-y-0 left-3 flex items-center text-gray-700">
+                    <i class="material-icons">
+                        <span x-show="!show">visibility</span>
+                        <span x-show="show">visibility_off</span>
+                    </i>
+                </button>
+            </div>
 
             @if ($errors->any())
                 <div class="mb-4 p-4 bg-red-100 text-red-500 rounded">
@@ -68,12 +61,23 @@
                 <a href="#" class="underline">نسيت كلمة المرور ؟</a>
             </div>
 
-            <button 
-                type="submit" 
+            <div class="flex w-full py-4" x-data="{ login_as: 'trainee' }">
+                <div class="w-full btn btn-outline-success cursor-pointer mx-1 text-white text-center"
+                    :class="login_as === 'trainer' ? 'btn-success' : ''" @click="login_as = 'trainer'">
+                    {{ __('log as trainer') }}
+                </div>
+                <div class="w-full btn btn-outline-success cursor-pointer mx-1 text-white text-center"
+                    :class="login_as === 'trainee' ? 'btn-success' : ''" @click="login_as = 'trainee'">
+                    {{ __('log as trainee') }}
+                </div>
+                <input type="hidden" name="login_as" x-model="login_as">
+            </div>
+            <button type="submit"
                 class="w-full bg-[#00d6af] rounded py-4 font-bold text-white hover:bg-[#00c0a0] transition">
                 دخول
             </button>
         </form>
     </div>
 </body>
+
 </html>

@@ -15,13 +15,13 @@
                             <p class="text-nevada">حساب متدرب تجريبي</p>
                         </div>
                         <div>
-                            
+
                         </div>
                         <div class="flex flex-col bg-teal-200 py-2 px-3 text-center rounded">
                             <span>ترتيبك</span><b>696</b>
-                             
+
                         </div>
-                      
+
                     </div><a class="w-1/3 flex items-center mt-4 sm:mt-0" href="/student/badges"></a>
                 </div>
             </div>
@@ -51,10 +51,10 @@
                             @endphp
                             <x-svgicon.round-progress :percentage="$userProgress" />
                         </div>
-@php
-                                $brainProgress = 91;
-                            @endphp
-                            <x-svgicon.brain-progress :percentage="$brainProgress" />
+                        @php
+                            $brainProgress = 91;
+                        @endphp
+                        <x-svgicon.brain-progress :percentage="$brainProgress" />
                     </div>
                 </div>
             </div>

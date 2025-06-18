@@ -6,22 +6,22 @@
                 {{ $user->name }}
             </div>
 
-            @if($user->profile_using != 'super_admin')
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.switch-account')
+            @if ($user->profile_using != 'super_admin')
+                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                    <div class="max-w-xl">
+                        @include('profile.partials.switch-account')
+                    </div>
                 </div>
-            </div>
             @endif
 
-            @if( $studntProfile == null )
-            @if(auth()->id() !=1)
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.add-trainee-account')
-                </div>
-            </div>
-            @endif
+            @if ($studntProfile == null)
+                @if (auth()->id() != 1)
+                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                        <div class="max-w-xl">
+                            @include('profile.partials.add-trainee-account')
+                        </div>
+                    </div>
+                @endif
             @endif
 
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
