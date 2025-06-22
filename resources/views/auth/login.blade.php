@@ -61,17 +61,6 @@
                 <a href="#" class="underline">نسيت كلمة المرور ؟</a>
             </div>
 
-            <div class="flex w-full py-4" x-data="{ login_as: 'trainee' }">
-                <div class="w-full btn btn-outline-success cursor-pointer mx-1 text-white text-center"
-                    :class="login_as === 'trainer' ? 'btn-success' : ''" @click="login_as = 'trainer'">
-                    {{ __('log as trainer') }}
-                </div>
-                <div class="w-full btn btn-outline-success cursor-pointer mx-1 text-white text-center"
-                    :class="login_as === 'trainee' ? 'btn-success' : ''" @click="login_as = 'trainee'">
-                    {{ __('log as trainee') }}
-                </div>
-                <input type="hidden" name="login_as" x-model="login_as">
-            </div>
             <button type="submit"
                 class="w-full bg-[#00d6af] rounded py-4 font-bold text-white hover:bg-[#00c0a0] transition">
                 دخول

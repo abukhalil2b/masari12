@@ -17,7 +17,7 @@ class ProfileController extends Controller
         $loggedUser = auth()->user();
 
         $studntProfile =  DB::table('user_profile')
-            ->where(['user_id' => $loggedUser->id, 'profile_id' => 4])->first();
+            ->where(['user_id' => $loggedUser->id, 'profile_id' => 3])->first();
 
         return view('profile.edit', [
             'user' => $request->user(),

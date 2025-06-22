@@ -29,18 +29,6 @@ class AuthenticatedSessionController extends Controller
 
 		$user = $request->user();
 
-		if (!in_array($user->profile_using, ['admin', 'super_admin'])) {
-			$loginAs = $request->input('login_as');
-
-			if (in_array($loginAs, ['trainer', 'trainee'])) {
-				$hasProfile = $user->profiles()->where('title', $loginAs)->exists();
-				if ($hasProfile) {
-					$user->profile_using = $loginAs;
-					$user->save();
-				}
-			}
-		}
-
 		return redirect()->intended('/dashboard');
 	}
 
