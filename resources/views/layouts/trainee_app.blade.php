@@ -74,24 +74,29 @@
 
                     <!-- Dropdown -->
                     <div x-show="open" @click.outside="open = false" x-transition
-                        class="absolute right-0 mt-20 w-64 shadow-lg text-tiber bg-white rounded p-2 z-50">
-                        <a class="block px-4 py-3 text-base text-[#082623] hover:bg-gray-200"
-                            href="/profile">تعديل
+                        class="absolute top-0 right-0 mt-20 w-64 shadow-lg bg-white rounded p-2 z-50">
+                        <a class="block px-4 py-3 text-base text-[#082623] hover:bg-gray-200" href="/profile">تعديل
                             البيانات الشخصية</a>
+                        @if (Auth::user()->profile_using != 'super_admin')
+                            @foreach (Auth::user()->profiles as $profile)
+                                    <a href="{{ route('switch-account', $profile->id) }}"
+                                        class="block px-4 py-3 text-base bg-[#fffbf6] text-[#bd6e1e] {{ Auth::user()->profile_using == $profile->title ? 'opacity-30' : '' }}">
+                                        الدخول كـ{{ __($profile->title) }}
+                                    </a>
+                            @endforeach
+                        @endif
                         <form method="POST" action="{{ route('logout') }}">
-    @csrf
-    <button
-        type="submit"
-        class="block w-full text-right px-4 py-3 text-base text-[#082623] hover:bg-gray-200"
-    >
-        تسجيل الخروج
-    </button>
-</form>>
+                            @csrf
+                            <button type="submit"
+                                class="block w-full text-right px-4 py-3 text-base text-[#082623] hover:bg-gray-200">
+                                تسجيل الخروج
+                            </button>
+                        </form>>
                     </div>
                 </div>
             </nav>
         </div>
-          {{ $slot }}
+        {{ $slot }}
     </div>
 
 </body>

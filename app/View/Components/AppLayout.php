@@ -12,7 +12,7 @@ class AppLayout extends Component {
 		//if authenticated
 		if (Auth::guard()->check()) {
 
-			if (auth()->user()->profile_using == 'trainee') {
+			if (Auth::user()->profile_using == 'trainee') {
 				return view('layouts.trainee_app');
 			}
 		}

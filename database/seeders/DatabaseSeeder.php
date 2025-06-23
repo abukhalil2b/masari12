@@ -40,7 +40,9 @@ class DatabaseSeeder extends Seeder
 		$this->call(UsersTableSeeder::class);
 
 		$this->call(ProfilesAndPermissionsSeeder::class);
-	
+		
+		$this->call(CourseCategorySeeder::class);
+		
 		$this->call(CourseTableSeeder::class);
 
 	}

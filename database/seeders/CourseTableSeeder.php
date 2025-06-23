@@ -30,23 +30,7 @@ class CourseTableSeeder extends Seeder
             'updated_at'=>now()
         ]);
 
-        CourseCategory::create([
-            'name'=>'التنمية البشرية',
-            'slug'=>'human_development',
-            'description'=>'التقنيات الحديثة',
-            'parent_id'=>NULL,
-            'created_at'=>now(),
-            'updated_at'=>now()
-        ]);
-
-        CourseCategory::create([
-            'name'=>'التقنيات الحديثة',
-            'slug'=>'new_technology',
-            'description'=>'التقنيات الحديثة',
-            'parent_id'=>NULL,
-            'created_at'=>now(),
-            'updated_at'=>now()
-        ]);
+       
 
         Course::create([
             'title' => 'أسس التنمية البشرية وتطوير الذات',

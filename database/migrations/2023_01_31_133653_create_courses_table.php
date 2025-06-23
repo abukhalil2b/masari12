@@ -16,9 +16,9 @@ return new class extends Migration
          */
         Schema::create('course_levels', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 30)->unique();//Human-readable title of the course level (e.g., "Level 1")
-            $table->tinyInteger('level_order')->unique();//Numerical order for sorting and display (e.g., 1, 2, 3)
-            $table->text('description')->nullable();//Optional detailed description of the level
+            $table->string('title', 30)->unique(); //Human-readable title of the course level (e.g., "Level 1")
+            $table->tinyInteger('level_order')->unique(); //Numerical order for sorting and display (e.g., 1, 2, 3)
+            $table->text('description')->nullable(); //Optional detailed description of the level
             $table->timestamps();
         });
 
@@ -29,11 +29,12 @@ return new class extends Migration
          */
         Schema::create('course_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 30)->unique();//Human-readable name of the course category (e.g., "Software Development")
-            $table->string('slug', 30)->unique();//URL-friendly unique identifier for the category (e.g., "software-dev")
-            $table->text('description')->nullable();//Optional detailed description of the category
+            $table->string('title', 30)->unique(); //Human-readable name of the course category (e.g., "Software Development")
+            $table->string('group', 30)->default(1);
+            $table->tinyInteger('position')->default(1);
+            $table->boolean('is_global')->default(1);
             $table->foreignId('parent_id')->nullable()->constrained('course_categories')->onDelete('SET NULL'); // Self-referencing foreign key for hierarchical categories. Null if a top-level category.
-        $table->timestamps();//Categories can be created/updated
+            $table->timestamps(); //Categories can be created/updated
         });
 
         /**
@@ -43,18 +44,18 @@ return new class extends Migration
          */
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('title');//The main title of the course
+            $table->string('title'); //The main title of the course
             $table->string('cover_image_url', 255)->nullable(); // Increased length to 255 for modern URLs
-            $table->text('description')->nullable();//Detailed description of the course content and objectives
+            $table->text('description')->nullable(); //Detailed description of the course content and objectives
             $table->string('language', 10)->nullable();
-            $table->string('status', 10)->default('draft');//Current status of the course (e.g., "draft", "published", "archived", "completed")
+            $table->string('status', 10)->default('draft'); //Current status of the course (e.g., "draft", "published", "archived", "completed")
 
             // Foreign keys for course classification
             $table->foreignId('course_level_id')->constrained('course_levels')->onDelete('restrict');
             $table->foreignId('course_category_id')->constrained('course_categories')->onDelete('restrict');
 
             // Registration and scheduling details
-            $table->enum('registration_type', ['at_period', 'open'])->default('open');//Determines how trainees can register: "at_period" for fixed enrollment windows, "open" for continuous enrollment
+            $table->enum('registration_type', ['at_period', 'open'])->default('open'); //Determines how trainees can register: "at_period" for fixed enrollment windows, "open" for continuous enrollment
             $table->timestamp('registration_start_at')->nullable(); //Start date and time for registration (for "at_period" courses)
             $table->timestamp('registration_end_at')->nullable(); //End date and time for registration (for "at_period" courses)
             $table->timestamp('course_start_at')->nullable(); //Start date and time for the course content availability (for "at_period" courses)
@@ -79,7 +80,7 @@ return new class extends Migration
             $table->foreignId('trainer_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
             $table->primary(['trainer_id', 'course_id']);
-            $table->timestamps();//for auditing trainer assignments.
+            $table->timestamps(); //for auditing trainer assignments.
         });
 
         Schema::create('course_trainees', function (Blueprint $table) {
@@ -186,7 +187,7 @@ return new class extends Migration
             $table->timestamp('completed_at')->nullable(); //Timestamp when the quiz attempt was completed (null if still in progress)
             $table->unsignedSmallInteger('score')->nullable(); //Score achieved by the trainee for this attempt (e.g., as a percentage or raw score)
             $table->unsignedTinyInteger('attempt_number')->default(1); //Sequential number of the attempt for a given trainee on a quiz
-            $table->timestamps();// tracks when an attempt record is created/last 
+            $table->timestamps(); // tracks when an attempt record is created/last 
         });
 
         /**
@@ -198,10 +199,10 @@ return new class extends Migration
             $table->foreignId('quiz_attempt_id')->constrained('quiz_attempts')->onDelete('cascade');
             $table->foreignId('question_id')->constrained('questions')->onDelete('cascade');
 
-            $table->foreignId('selected_choice_id')->nullable()->constrained('question_choices')->onDelete('cascade');//Foreign key to question_choices table, for single_choice questions
-            $table->text('text_answer')->nullable();//The trainee\'s typed answer for "text_input" or "numeric_input" questions
+            $table->foreignId('selected_choice_id')->nullable()->constrained('question_choices')->onDelete('cascade'); //Foreign key to question_choices table, for single_choice questions
+            $table->text('text_answer')->nullable(); //The trainee\'s typed answer for "text_input" or "numeric_input" questions
 
-            $table->boolean('is_correct')->nullable();//Indicates if the trainee\'s answer was correct (null before grading, then true/false)
+            $table->boolean('is_correct')->nullable(); //Indicates if the trainee\'s answer was correct (null before grading, then true/false)
             $table->timestamps(); // created_at: when the answer was first saved; updated_at: when answer or grading changed
         });
 
@@ -212,8 +213,8 @@ return new class extends Migration
         Schema::create('course_questionnaires', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
-            $table->string('title')->nullable();//Title of the questionnaire (e.g., "End of Course Feedback Survey")
-            $table->string('google_form_url', 255);//URL of the Google Form or other external survey
+            $table->string('title')->nullable(); //Title of the questionnaire (e.g., "End of Course Feedback Survey")
+            $table->string('google_form_url', 255); //URL of the Google Form or other external survey
             $table->timestamps(); // Track creation/update of the questionnaire link
         });
     }

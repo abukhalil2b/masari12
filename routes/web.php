@@ -4,6 +4,8 @@
 use App\Http\Controllers\Admin\AdminImpersonateController;
 use App\Http\Controllers\Admin\AdminProfilePermissionController;
 use App\Http\Controllers\Admin\AdminCourseController;
+use App\Http\Controllers\Admin\AdminCourseCategoryController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
@@ -136,6 +138,26 @@ Route::middleware(['auth', 'impersonate'])->prefix('admin/user')->group(function
 		->name('admin.user.trainee.store');
 });
 
+
+/*
+|--------------------------------------------------------------------------
+| courses
+|--------------------------------------------------------------------------
+ */
+Route::middleware(['auth', 'impersonate'])->prefix('admin/course_categories')->group(function () {
+
+	Route::get('index', [AdminCourseCategoryController::class, 'index'])
+		->name('admin.course_categories.index');
+
+	Route::get('show/{courseCategory}', [AdminCourseCategoryController::class, 'show'])
+		->name('admin.course_categories.show');
+
+	Route::post('store', [AdminCourseCategoryController::class, 'store'])
+		->name('admin.course_categories.store');
+
+	Route::put('update/{courseCategory}', [AdminCourseCategoryController::class, 'update'])
+		->name('admin.course_categories.update');
+});
 
 /*
 |--------------------------------------------------------------------------
