@@ -10,7 +10,7 @@
                 <option value="">كل الفئات</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}" {{ $selectedCategory == $category->id ? 'selected' : '' }}>
-                        {{ $category->name }}
+                        {{ $category->title }}
                     </option>
                 @endforeach
             </select>
@@ -25,7 +25,7 @@
                     <th>الفئة</th>
                     <th>النوع</th>
                     <th>الحالة</th>
-                    <th>هل مجانية</th>
+                    <th>المدرب</th>
                     <th>تاريخ بداية الدورة</th>
                     <th>العمليات</th>
                 </tr>
@@ -35,12 +35,16 @@
                     <tr class="p-4">
                         <td>{{ $key + 1 }}</td>
                         <td class="font-bold">{{ $course->title }}</td>
-                        <td>{{ $course->courseCategory->name }}</td>
+                        <td>{{ $course->courseCategory->title }}</td>
                         <td>{{ __($course->registration_type) }}</td>
                         <td class="{{ $course->status == 'published' ? 'text-green-600' : 'text-red-600' }}">
                             {{ __($course->status) }}</td>
-                        <td>{{ $course->is_free ? 'نعم' : 'لا' }}</td>
-                        <td>{{ $course->course_start_at ?? 'غير محدد' }}</td>
+                        <td>
+                            @foreach($course->trainers as $trainer )
+                            <div>{{ $trainer->name }}</div>
+                            @endforeach
+                        </td>
+                        <td>{{ $course->course_start_at ? Str::substr($course->course_start_at, 0, 11) : 'غير محدد' }}</td>
                         <td>
                             <a href="{{ route('admin.course.show', $course->id) }}"
                                 class="btn btn-sm btn-info flex gap-2">

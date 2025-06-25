@@ -9,19 +9,7 @@ return new class extends Migration
 
     public function up()
     {
-        /**
-         * course_levels Table
-         * Stores predefined levels for courses (e.g., Beginner, Intermediate, Advanced).
-         * Each level has a unique title and an order for display.
-         */
-        Schema::create('course_levels', function (Blueprint $table) {
-            $table->id();
-            $table->string('title', 30)->unique(); //Human-readable title of the course level (e.g., "Level 1")
-            $table->tinyInteger('level_order')->unique(); //Numerical order for sorting and display (e.g., 1, 2, 3)
-            $table->text('description')->nullable(); //Optional detailed description of the level
-            $table->timestamps();
-        });
-
+        
         /**
          * course_categories Table
          * Stores categories to organize courses (e.g., Software Development, Marketing).
@@ -47,11 +35,11 @@ return new class extends Migration
             $table->string('title'); //The main title of the course
             $table->string('cover_image_url', 255)->nullable(); // Increased length to 255 for modern URLs
             $table->text('description')->nullable(); //Detailed description of the course content and objectives
-            $table->string('language', 10)->nullable();
+            $table->string('language', 10)->default('ar');
             $table->string('status', 10)->default('draft'); //Current status of the course (e.g., "draft", "published", "archived", "completed")
+            $table->string('course_level')->default('1');//course level (e.g., "المستوى المبتدئ")
 
             // Foreign keys for course classification
-            $table->foreignId('course_level_id')->constrained('course_levels')->onDelete('restrict');
             $table->foreignId('course_category_id')->constrained('course_categories')->onDelete('restrict');
 
             // Registration and scheduling details
@@ -64,7 +52,7 @@ return new class extends Migration
             $table->tinyInteger('points')->nullable(); //points for trainee when he finished course
             $table->tinyInteger('total_lessons')->default(0); //we can calculate it while creating lessons. it is better for quering
             $table->tinyInteger('total_hours')->default(0); //we can calculate it while creating lessons. it is better for quering
-            $table->boolean('is_only_live')->default(false); //some course will be only online by Google meet or Zoom
+            $table->boolean('is_only_live')->default(false); //some course will be only online by Google meet or Zoom 
             $table->boolean('is_free')->default(true); //if it is not free then we activate next 2 fields (purchase_price,purchase_points)
 
             $table->decimal('purchase_price', 7, 3)->default(0); //Price of the course (e.g., 13.000). Trainee can take it by money

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MessageReplay extends Model
 {
-    use HasFactory;
+   
 
     public $table = 'message_replies';
     

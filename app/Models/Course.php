@@ -9,9 +9,13 @@ class Course extends Model
 
     protected $guarded = [];
 
+    public function courseWeeks()
+{
+    return $this->hasMany(CourseWeek::class);
+}
     public function courseCategory()
     {
-        return $this->belongsTo(CourseCategory::class);
+        return $this->belongsTo(CourseCategory::class, 'course_category_id');
     }
 
     public function courseLevel()
@@ -24,12 +28,12 @@ class Course extends Model
         return $this->hasMany(CourseLesson::class);
     }
 
-    public function courseTrainers()
+    public function trainers()
     {
         return $this->belongsToMany(User::class, 'course_trainers', 'course_id', 'trainer_id');
     }
 
-    public function courseTrainees()
+    public function trainees()
     {
         return $this->belongsToMany(User::class, 'course_trainees', 'course_id', 'trainee_id');
     }

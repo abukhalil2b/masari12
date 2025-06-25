@@ -21,7 +21,10 @@
                             <span>ترتيبك</span><b>696</b>
 
                         </div>
-
+                        @php
+                            $brainProgress = 91;
+                        @endphp
+                        <x-svgicon.brain-progress :percentage="$brainProgress" />
                     </div><a class="w-1/3 flex items-center mt-4 sm:mt-0" href="/student/badges"></a>
                 </div>
             </div>
@@ -51,10 +54,8 @@
                             @endphp
                             <x-svgicon.round-progress :percentage="$userProgress" />
                         </div>
-                        @php
-                            $brainProgress = 91;
-                        @endphp
-                        <x-svgicon.brain-progress :percentage="$brainProgress" />
+
+
                     </div>
                 </div>
             </div>

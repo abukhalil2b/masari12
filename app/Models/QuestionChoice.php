@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class QuestionChoice extends Model
 {
-   use HasFactory;
+protected $guarded = [];
+
    public $timestamps = false;
 }

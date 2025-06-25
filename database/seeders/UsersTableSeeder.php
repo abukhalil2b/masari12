@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
         $adminUser = User::create([
             'name' => 'Ali salim',
             'civil_id' => '12341234',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('12341234'),
             'profile_using' => 'admin',
             'gender' => 'male',
             'status' => 'active',
@@ -63,7 +63,7 @@ class UsersTableSeeder extends Seeder
         $trainerUser = User::create([
             'name' => 'Trainer Nassir',
             'civil_id' => '287654321',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('287654321'),
             'profile_using' => 'trainer',
             'gender' => 'male',
             'status' => 'active',
@@ -86,7 +86,7 @@ class UsersTableSeeder extends Seeder
         $traineeUser = User::create([
             'name' => 'Trainee Khamis',
             'civil_id' => '3987654321',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('3987654321'),
             'profile_using' => 'trainee',
             'gender' => 'male',
             'status' => 'active',

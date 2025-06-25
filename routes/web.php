@@ -5,11 +5,13 @@ use App\Http\Controllers\Admin\AdminImpersonateController;
 use App\Http\Controllers\Admin\AdminProfilePermissionController;
 use App\Http\Controllers\Admin\AdminCourseController;
 use App\Http\Controllers\Admin\AdminCourseCategoryController;
+use App\Http\Controllers\Admin\AdminCourseLessonController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\UserTaskController;
@@ -141,7 +143,7 @@ Route::middleware(['auth', 'impersonate'])->prefix('admin/user')->group(function
 
 /*
 |--------------------------------------------------------------------------
-| courses
+| AdminCourseCategoryController
 |--------------------------------------------------------------------------
  */
 Route::middleware(['auth', 'impersonate'])->prefix('admin/course_categories')->group(function () {
@@ -161,7 +163,22 @@ Route::middleware(['auth', 'impersonate'])->prefix('admin/course_categories')->g
 
 /*
 |--------------------------------------------------------------------------
-| courses
+| AdminCourseLessonController
+|--------------------------------------------------------------------------
+ */
+Route::middleware(['auth', 'impersonate'])->group(function () {
+
+	Route::post('admin/course_weeks_and_lessons/store/{course}', [AdminCourseLessonController::class, 'weeks_and_lessons_store'])
+		->name('admin.course_weeks_and_lessons.store');
+
+	Route::post('admin/course_lessons/store/{course}', [AdminCourseLessonController::class, 'store'])
+		->name('admin.course_lessons.store');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| AdminCourseController
 |--------------------------------------------------------------------------
  */
 Route::middleware(['auth', 'impersonate'])->prefix('admin/course')->group(function () {
@@ -174,9 +191,23 @@ Route::middleware(['auth', 'impersonate'])->prefix('admin/course')->group(functi
 		->middleware('permission:admin.course.show')
 		->name('admin.course.show');
 
+	Route::get('edit/{course}', [AdminCourseController::class, 'edit'])
+		->name('admin.course.edit');
+
 	Route::post('store', [AdminCourseController::class, 'store'])
 		->middleware('permission:admin.course.store')
 		->name('admin.course.store');
+});
+
+/*
+|--------------------------------------------------------------------------
+| AdminCourseController
+|--------------------------------------------------------------------------
+ */
+Route::middleware(['auth', 'impersonate'])->group(function () {
+
+	Route::get('course/index/{course_category_id?}', [CourseController::class, 'index'])
+		->name('course.index');
 });
 
 

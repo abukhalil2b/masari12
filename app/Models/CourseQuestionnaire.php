@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CourseQuestionnaire extends Model
 {
-   use HasFactory;
+  protected $guarded = [];
+
 
 }

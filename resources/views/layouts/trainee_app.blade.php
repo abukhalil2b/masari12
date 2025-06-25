@@ -39,7 +39,7 @@
                         <i class="material-icons text-[40px] sm:text-[48px] mb-1 leading-none">view_list</i>
                         <span>دوراتي</span>
                     </a>
-                    <a class="flex flex-col items-center hover:text-white" href="#">
+                    <a class="flex flex-col items-center hover:text-white" href="{{ route('course.index') }}">
                         <i class="material-icons text-[40px] sm:text-[48px] mb-1 leading-none">play_circle_filled</i>
                         <span>الدورات</span>
                     </a>

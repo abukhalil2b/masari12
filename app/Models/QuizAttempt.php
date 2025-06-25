@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class QuizAttempt extends Model
 {
-   use HasFactory;
+  protected $guarded = [];
 
 }
